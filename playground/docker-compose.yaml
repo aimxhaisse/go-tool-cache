@@ -1,0 +1,19 @@
+version: '3'
+services:
+  memcached:
+    image: docker.io/bitnami/memcached:1
+    ports:
+      - '11211:11211'
+  golang-base:
+    image: golang:1.21rc3-cacheprog
+    build:
+      dockerfile: ./Dockerfile.base
+  go-tool-cache:
+    image: gotoolcache
+    build:
+      context: ../
+      dockerfile: ./playground/Dockerfile.gotoolcache
+    depends_on:
+      - golang-base
+    ports:
+      - '31364:31364'

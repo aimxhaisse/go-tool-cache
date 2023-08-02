@@ -1,0 +1,8 @@
+FROM golang:1.21rc3-cacheprog
+
+ADD . /app
+WORKDIR /app
+
+RUN go build cmd/go-cacher-server/cacher-server.go
+
+CMD ./cacher-server
